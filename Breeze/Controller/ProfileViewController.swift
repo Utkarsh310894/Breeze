@@ -38,8 +38,17 @@ class ProfileViewController: UIViewController {
     }
     var employeeData : [Employee] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+            let alert = UIAlertController(title: "Success", message: "Login Successfull", preferredStyle: .alert)
+            self.present(alert, animated: true) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                     alert.dismiss(animated: true, completion: nil)
+                }
+        }
+        
         navigationController?.navigationItem.hidesBackButton = true
         ApiService.sharedInstance.getEmpData(url: url) { (data) in
             DispatchQueue.main.async {

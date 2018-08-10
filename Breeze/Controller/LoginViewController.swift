@@ -47,15 +47,7 @@ class LoginViewController: UIViewController {
                     {
                         if emailString == testUserName && passwordString == password
                         {
-//                            DispatchQueue.main.async {
-//                                let EmployeeDataTableViewController =  self.storyboard!.instantiateViewController(withIdentifier: "EmployeeDataTableViewController")
-//                                self.navigationController?.present(EmployeeDataTableViewController, animated: true, completion: {
-//                                    self.displayAlert(userMessage: "Login SuccessFull")
-//                                })
-//                            }
-
                           loginSucess()
-                          
                         }
                         else{
                             displayAlert(userMessage: "Invalid UserName or Password")
@@ -81,14 +73,9 @@ class LoginViewController: UIViewController {
     }
     
     func loginSucess(){
-        let alert = UIAlertController(title: "Success", message: "Login Successfull", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
             let evc =  self.storyboard!.instantiateViewController(withIdentifier: "ProfileViewController")
             self.defaults.set(true, forKey: "isLogin")
             self.navigationController?.pushViewController(evc, animated: true)
-        }
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
         clearTextFeild()
         ApiService.sharedInstance.sendData(url: "http://api.breezworkforce.com/v1/employee/login/") { (a, b) in
             print("done")
